@@ -1,16 +1,13 @@
-package ru.tms.recyclertest
+package ru.tms.recyclertest.presentation
 
 import android.os.Bundle
-import android.widget.Toast
+import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.tms.recyclertest.recycler.Chat
-import ru.tms.recyclertest.recycler.ChatAdapter
+import ru.tms.recyclertest.R
+import ru.tms.recyclertest.presentation.recycler.Chat
 
 class MainActivity : AppCompatActivity() {
-    private val chatAdapter by lazy { ChatAdapter() }
-
-    private val chatItems: List<Chat> = initChatList() // Этих данных тут быть не должно. Выносить их в отдельный объект, как на прошлом уроке
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,16 +19,14 @@ class MainActivity : AppCompatActivity() {
         initRecycler()
     }
 
-    override fun onResume() {
-        super.onResume()
-        chatAdapter.submitList(chatItems)
-    }
 
     private fun initRecycler() {
-        recyclerChat.adapter = chatAdapter
+        inputField.setOnClickListener {
+            val fr = ChooseMessageFragment.newInstance { chatItem ->
+                inputField.text = Editable.Factory.getInstance().newEditable(chatItem.subtitle)
+            }
 
-        chatAdapter.setOnItemClickListener { chat ->
-            Toast.makeText(this, chat.title, Toast.LENGTH_LONG).show()
+            fr.show(supportFragmentManager, ChooseMessageFragment.TAG)
         }
     }
 

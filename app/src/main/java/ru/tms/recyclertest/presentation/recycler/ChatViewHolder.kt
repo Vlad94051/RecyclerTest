@@ -1,4 +1,4 @@
-package ru.tms.recyclertest.recycler
+package ru.tms.recyclertest.presentation.recycler
 
 import android.view.LayoutInflater
 import android.view.View
