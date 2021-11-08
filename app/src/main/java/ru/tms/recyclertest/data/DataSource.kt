@@ -1,10 +1,12 @@
 package ru.tms.recyclertest.data
 
+import android.widget.LinearLayout
 import ru.tms.recyclertest.R
+import ru.tms.recyclertest.domain.ChatInteractor
 import ru.tms.recyclertest.presentation.recycler.Chat
 
-object DataSource {
-    val list : List<Chat> = listOf(
+class DataSource : ChatInteractor {
+    private val list: List<Chat> = listOf(
         Chat(
             "12",
             "13",
@@ -21,4 +23,17 @@ object DataSource {
             R.drawable.ic_launcher_foreground
         )
     )
+
+    private val orientation: DataOrientation = DataOrientation.VERTICAL
+
+    override fun loadMessages(): List<Chat> {
+        return list
+    }
+
+    override fun loadOrientation(): Int {
+        return when (orientation) {
+            DataOrientation.HORIZONTAL -> LinearLayout.HORIZONTAL
+            else -> LinearLayout.VERTICAL
+        }
+    }
 }
