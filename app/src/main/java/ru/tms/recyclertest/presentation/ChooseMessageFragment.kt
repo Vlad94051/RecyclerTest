@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_choose_message.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import ru.tms.recyclertest.R
 import ru.tms.recyclertest.presentation.recycler.Chat
 import ru.tms.recyclertest.presentation.recycler.ChatAdapter
@@ -20,7 +22,7 @@ class ChooseMessageFragment(private val listener: (Chat) -> Unit) : BottomSheetD
     }
 
     private val adapter by lazy { ChatAdapter() }
-    private val viewModel: ChooseMessageViewModel by viewModels()
+    private val viewModel: ChooseMessageViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +37,8 @@ class ChooseMessageFragment(private val listener: (Chat) -> Unit) : BottomSheetD
 
         initObserves()
         list.adapter = adapter
+
+        viewModel.loadMessages()
 
         adapter.setOnItemClickListener { chatItem ->
             listener.invoke(chatItem)
