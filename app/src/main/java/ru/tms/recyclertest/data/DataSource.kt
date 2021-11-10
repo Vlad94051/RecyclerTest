@@ -5,7 +5,7 @@ import ru.tms.recyclertest.R
 import ru.tms.recyclertest.domain.ChatInteractor
 import ru.tms.recyclertest.presentation.recycler.Chat
 
-class DataSource : ChatInteractor {
+class DataSource: ChatInteractor {
     private val list: List<Chat> = listOf(
         Chat(
             "12",

@@ -20,7 +20,7 @@ class ChooseMessageFragment(private val listener: (Chat) -> Unit) : BottomSheetD
     }
 
     private val adapter by lazy { ChatAdapter() }
-    private val viewModel by lazy { ChooseMessageViewModel() }
+    private val viewModel: ChooseMessageViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

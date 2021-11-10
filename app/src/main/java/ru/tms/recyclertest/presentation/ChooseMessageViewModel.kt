@@ -7,8 +7,7 @@ import ru.tms.recyclertest.data.DataSource
 import ru.tms.recyclertest.domain.ChatInteractor
 import ru.tms.recyclertest.presentation.recycler.Chat
 
-class ChooseMessageViewModel : ViewModel() {
-    private val interactor: ChatInteractor = DataSource()
+class ChooseMessageViewModel(private val interactor: ChatInteractor) : ViewModel() {
 
     val messages: LiveData<List<Chat>> get() = _messages
     private val _messages = MutableLiveData<List<Chat>>(interactor.loadMessages())
