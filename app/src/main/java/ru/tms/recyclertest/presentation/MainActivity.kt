@@ -2,12 +2,19 @@ package ru.tms.recyclertest.presentation
 
 import android.os.Bundle
 import android.text.Editable
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.tms.recyclertest.R
 import ru.tms.recyclertest.presentation.recycler.Chat
 
 class MainActivity : AppCompatActivity() {
+
+    private val onChooseFilter: OnChooseFilter = object : OnChooseFilter {
+        override fun chooseFilter(filter: String) {
+         // TODO: viewModel.onFilterChoosen(filter)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +24,16 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         initRecycler()
+
+        val fr = RadioGroupFragment.newInstance(onChooseFilter)
+
+        btn1.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(RadioGroupFragment.TAG)
+                .add(R.id.container, fr , RadioGroupFragment.TAG)
+                .commit()
+        }
     }
 
 
